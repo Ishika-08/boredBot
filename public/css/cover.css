@@ -1,7 +1,49 @@
+/* @import url('../node_modules/font-awesome/css/font-awesome.min.css'); */
 body{
-  margin: 0 10%;
+  margin: 2% 10%; 
+  overflow: hidden;
+} 
+
+nav{
+  border-bottom: 2px solid rgb(133, 133, 81);
 }
 
-main{
-  margin: 50px auto;
+nav > *{
+  display: inline-block;
+}
+
+.contact>a{
+  margin: 0 2%;
+}
+
+.contact{
+  float:right;
+  min-width: 20%;
+}
+
+
+
+.dropdown{
+  margin: 1% 0;
+}
+
+.container{
+  width:80%;
+  margin: 1% auto;
+  text-align: center;
+}
+
+.container>*{
+  margin: 3%;
+}
+
+img{
+  width: 20%;
+  height:20%;
+
+}
+
+.btn-warning{
+  color: white;
+  font-weight: bolder;
 }

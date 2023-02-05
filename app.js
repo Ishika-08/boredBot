@@ -1,5 +1,6 @@
 const express = require('express');
 const https= require("https");
+const _ = require('lodash');
 
 const app = express();
 // app.use(BodyParser.urlencoded({extended: true}));
@@ -8,8 +9,7 @@ app.set('view engine', "ejs");
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use('/css', express.static(__dirname + 'node_modules/bootstrap/dist/css'))
-app.use('/js', express.static(__dirname + 'node_modules/bootstrap/dist/js'))
+
 
 app.use(express.static(__dirname + "/public"));
 
@@ -18,8 +18,18 @@ app.get("/",(req,res)=>{
     https.get("https://www.boredapi.com/api/activity/",(response)=>{
         response.on("data",function(data){
             const suggested = JSON.parse(data);
-            res.render("home",{activity: suggested.activity});
+            res.render("home",{activity: suggested.activity, category:"All", render:"/"});
+        })
+    })
+})
 
+app.get("/:parameter",(req,res)=>{
+    const url= "https://www.boredapi.com/api/activity?type=" + req.params.parameter;
+
+    https.get(url,(response)=>{
+        response.on("data",function(data){
+            const suggested = JSON.parse(data);
+            res.render("home",{activity: suggested.activity, category:_.capitalize(req.params.parameter), render:"/" + req.params.parameter});
         })
     })
 })
